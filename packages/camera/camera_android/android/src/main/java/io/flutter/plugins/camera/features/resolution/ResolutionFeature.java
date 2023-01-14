@@ -114,7 +114,8 @@ public class ResolutionFeature extends CameraFeature<ResolutionPreset> {
     if (preset.ordinal() > ResolutionPreset.high.ordinal()) {
       preset = ResolutionPreset.high;
     }
-    if (Build.VERSION.SDK_INT >= 31) {
+    // Modifying the condition to use deprecated functions on Build.VERSION.SDK_INT == 33
+    if (Build.VERSION.SDK_INT >= 31 && Build.VERSION.SDK_INT < 33) {
       EncoderProfiles profile =
           getBestAvailableCamcorderProfileForResolutionPreset(cameraId, preset);
       List<EncoderProfiles.VideoProfile> videoProfiles = profile.getVideoProfiles();
@@ -235,7 +236,7 @@ public class ResolutionFeature extends CameraFeature<ResolutionPreset> {
       return;
     }
 
-    if (Build.VERSION.SDK_INT >= 31) {
+    if (Build.VERSION.SDK_INT >= 31 && Build.VERSION.SDK_INT < 33) {
       recordingProfile =
           getBestAvailableCamcorderProfileForResolutionPreset(cameraId, resolutionPreset);
       List<EncoderProfiles.VideoProfile> videoProfiles = recordingProfile.getVideoProfiles();
